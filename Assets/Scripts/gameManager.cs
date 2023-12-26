@@ -84,7 +84,7 @@ public class gameManager : MonoBehaviour
 
             if(cardsLeft == 2)
             {
-                Invoke("GameEnd", 1f);
+                Invoke("GameEnd", 0.1f);
             }
         }
         else 

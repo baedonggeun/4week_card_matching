@@ -6,9 +6,15 @@ using System.Linq;
 
 public class gameManager : MonoBehaviour
 {
+    public static gameManager I;
+
+    private void Awake()
+    {
+        I = this;
+    }
+
     public Text timeText;
     public GameObject card;
-
 
 
     float time;

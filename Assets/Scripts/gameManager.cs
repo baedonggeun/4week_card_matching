@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class gameManager : MonoBehaviour
 {
     public Text timeText;
+    public GameObject card;
 
 
 
@@ -15,6 +16,12 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+
+        for(int i = 0; i<16; i++)
+        {
+            GameObject newCard = Instantiate(card);
+            newCard.transform.parent = GameObject.Find("cards").transform;
+        }
     }
 
     // Update is called once per frame

@@ -41,5 +41,26 @@ public class card : MonoBehaviour
     }
 
 
+    public void destroyCard()
+    {
+        Invoke("destroyCardInvoke", 0.1f);
+    }
+
+    void destroyCardInvoke()
+    {
+        Destroy(gameObject);
+    }
+
+    public void closeCard()
+    {
+        Invoke("closeCardInvoke", 1.0f);
+    }
+
+    void closeCardInvoke()
+    {
+        anim.SetBool("isOpen", false);
+        transform.Find("back").gameObject.SetActive(true);
+        transform.Find("front").gameObject.SetActive(false);
+    }
 
 }

@@ -13,22 +13,30 @@ public class gameManager : MonoBehaviour
 
     float time;
 
-    int card_count = 16; //게임에 사용되는 카드 전체 개수
+   
     int card_type = 16; //카드 종류
+    int card_count = 16; //게임에 사용되는 카드 전체 개수
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1.0f;
 
-        int[] image_N = new int[card_type];
+        int[] card_N = new int[card_count];
 
-        for (int j = 0; j < card_count; j++)
+        for (int i = 0; i < card_count; i++)
         {
-            image_N[j] = j % (card_count / 2);
+            card_N[i] = i;
         }
 
-        image_N = image_N.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
+        card_N = card_N.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
+
+        for(int i = 0; i < card_count; i++)
+        {
+            card_N[i] = card_N[i % (card_count / 2)];
+        }
+
+        card_N = card_N.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
 
         for (int i = 0; i< card_count; i++)
@@ -40,7 +48,7 @@ public class gameManager : MonoBehaviour
             float y = -(i / 4) * 1.9f + 2.5f;
             newCard.transform.position = new Vector3(x, y, 0);
 
-            string cardName = "card" + image_N[i].ToString();
+            string cardName = "card" + card_N[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
         }
     }

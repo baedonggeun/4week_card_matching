@@ -15,8 +15,8 @@ public class gameManager : MonoBehaviour
 
 
     public Text timeText;
+    public GameObject endText;
     public GameObject card;
-
     public GameObject firstCard;
     public GameObject secondCard;
 
@@ -79,6 +79,13 @@ public class gameManager : MonoBehaviour
         {
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
+
+            int cardsLeft = GameObject.Find("cards").transform.childCount;
+
+            if(cardsLeft == 2)
+            {
+                Invoke("GameEnd", 1f);
+            }
         }
         else 
         {
@@ -88,5 +95,12 @@ public class gameManager : MonoBehaviour
 
         firstCard = null;
         secondCard = null;
+    }
+
+    void GameEnd()
+    {
+        Time.timeScale = 0f;
+
+        endText.SetActive(true);
     }
 }

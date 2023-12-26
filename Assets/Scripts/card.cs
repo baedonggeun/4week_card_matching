@@ -26,6 +26,20 @@ public class card : MonoBehaviour
         transform.Find("front").gameObject.SetActive(true);
 
         transform.Find("back").gameObject.SetActive(false);
+
+
+        if(gameManager.I.firstCard == null)
+        {
+            gameManager.I.firstCard = gameObject;
+        }
+        else
+        {
+            gameManager.I.secondCard = gameObject;
+            gameManager.I.isMatched();
+        }
+
     }
+
+
 
 }

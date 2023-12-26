@@ -13,8 +13,12 @@ public class gameManager : MonoBehaviour
         I = this;
     }
 
+
     public Text timeText;
     public GameObject card;
+
+    public GameObject firstCard;
+    public GameObject secondCard;
 
 
     float time;
@@ -64,5 +68,10 @@ public class gameManager : MonoBehaviour
     {
         time += Time.deltaTime;
         timeText.text = time.ToString("N2");
+    }
+
+    public void isMatched()
+    {
+
     }
 }

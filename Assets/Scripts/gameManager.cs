@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
     public Text scoreText;
     public Text setText;
     public Text bestScoreTxt;
+    public Text matchCountTxt;
 
     public GameObject card;
     public GameObject firstCard;
@@ -89,7 +90,7 @@ public class gameManager : MonoBehaviour
         {
             timeText.text = "<color=#960707>" + time.ToString("N2") + "</color>";
 
-            if(time >= 14.90f)
+            if(time >= 14.00f)
             {
                 audioSource.PlayOneShot(urgent);
             }
@@ -185,6 +186,7 @@ public class gameManager : MonoBehaviour
         float maxScore = PlayerPrefs.GetFloat("bestscore");
 
         setText.text = scoreText.text;
+        matchCountTxt.text = matchText.text;
         bestScoreTxt.text = maxScore.ToString("N2");
     }
 }

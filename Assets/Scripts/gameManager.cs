@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
 
     public Text timeText;
     public GameObject endText;
+    public Text scoreText;
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;
@@ -26,11 +27,14 @@ public class gameManager : MonoBehaviour
     public AudioSource audioSource;
 
 
-    float time = 30.0f;
+    float time = 60.0f;
 
    
     int card_type = 16; //카드 종류
     int card_count = 16; //게임에 사용되는 카드 전체 개수
+
+    float score = 10.00f;
+    float matchCount = 0.00f;
 
     // Start is called before the first frame update
     void Start()
@@ -78,17 +82,21 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
+        scoreText.text = (score - matchCount).ToString("N2");
 
         //15초 이하면 timeText 색상 붉은색으로 변경 + urgent sound 재생
-        if(time <= 15.0f)
+        if (time <= 15.0f)
         {
             timeText.text = "<color=#960707>" + time.ToString("N2") + "</color>";
 
-            audioSource.PlayOneShot(urgent);
+            if(time >= 14.0f)
+            {
+                audioSource.PlayOneShot(urgent);
+            }
         }
 
         //0.00초 이하일 경우 게임 종료
-        if(time <= 0.00f)
+        if (time <= 0.00f)
         {
             Invoke("GameEnd", 0.0f);
         }
@@ -112,15 +120,21 @@ public class gameManager : MonoBehaviour
             }
 
             audioSource.PlayOneShot(tada);
+
+            matchCount++;
+
+            score += 5;
         }
         else 
         {
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
 
+            audioSource.PlayOneShot(fail);
+
             time -= 1.0f;
 
-            audioSource.PlayOneShot(fail);
+            matchCount++;
         }
 
         firstCard = null;
@@ -129,6 +143,8 @@ public class gameManager : MonoBehaviour
 
     void GameEnd()
     {
+        score += time;
+        
         Time.timeScale = 0f;
 
         endText.SetActive(true);

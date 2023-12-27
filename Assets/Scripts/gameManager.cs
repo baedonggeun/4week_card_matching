@@ -28,7 +28,7 @@ public class gameManager : MonoBehaviour
     public AudioClip urgent;
 
     float time = 60.0f; //시간
-    float score = 10.00f; //점수
+    float score = 10.00f; //시작 점수
     
     int matchCount = 0; //매칭 횟수
     int card_type = 16; //카드 종류
@@ -81,15 +81,13 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
-        matchText.text = matchCount.ToString("N2");
-        scoreText.text = (score - matchCount).ToString("N2");
-
+        
         //15초 이하면 timeText 색상 붉은색으로 변경 + urgent sound 재생
         if (time <= 15.00f)
         {
             timeText.text = "<color=#960707>" + time.ToString("N2") + "</color>";
 
-            if(time >= 15.01f)
+            if(time >= 14.90f)
             {
                 audioSource.PlayOneShot(urgent);
             }
@@ -104,13 +102,18 @@ public class gameManager : MonoBehaviour
 
             score += time;
         }
+
+        matchText.text = matchCount.ToString();
+        scoreText.text = score.ToString("N2");
     }
 
+    //매칭 함수
     public void isMatched()
     {
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
 
+        //카드 매칭 성공 시
         if(firstCardImage == secondCardImage)
         {
             firstCard.GetComponent<card>().destroyCard();
@@ -118,19 +121,19 @@ public class gameManager : MonoBehaviour
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
 
-            if(cardsLeft == 2)
+            audioSource.PlayOneShot(tada);
+
+            score += 6;
+
+            //마지막 카드 매칭됐을 때 게임 종료
+            if (cardsLeft == 2)
             {
                 Invoke("GameEnd", 0.00f);
 
                 score += time;
             }
-
-            audioSource.PlayOneShot(tada);
-
-            matchCount++;
-
-            score += 5;
         }
+        //카드 매칭 실패 시
         else 
         {
             firstCard.GetComponent<card>().closeCard();
@@ -139,10 +142,18 @@ public class gameManager : MonoBehaviour
             audioSource.PlayOneShot(fail);
 
             time -= 1.0f;
-
-            matchCount++;
         }
 
+        matchCount++;
+
+        score -= 1;
+
+        if(score <= 0.00f)
+        {
+            score = 0;
+        }
+
+        //초기화
         firstCard = null;
         secondCard = null;
     }

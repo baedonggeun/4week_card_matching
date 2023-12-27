@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class endText : MonoBehaviour
+public class retryBtn : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,8 +17,9 @@ public class endText : MonoBehaviour
         
     }
 
-    public void ReGame()
+
+    public void gameRetry()
     {
-        SceneManager.LoadScene("EndScene");
+        SceneManager.LoadScene("MainScene");
     }
 }

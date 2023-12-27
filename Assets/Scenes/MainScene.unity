@@ -505,10 +505,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 1838790930}
-  endText: {fileID: 437135369}
   matchText: {fileID: 616044335}
   scoreText: {fileID: 2013221908}
-  card: {fileID: 6390207088607420598, guid: 4731e1f0739a14b4da18b4ee70fa1c34, type: 3}
+  endText: {fileID: 437135369}
+  card: {fileID: 1141203161905730026, guid: 4731e1f0739a14b4da18b4ee70fa1c34, type: 3}
+  cardNameText: {fileID: 5100448891616086668, guid: 60c7b52e1445de549a9be2218100a7af, type: 3}
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   audioSource: {fileID: 919915507}

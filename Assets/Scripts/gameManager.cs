@@ -14,10 +14,10 @@ public class gameManager : MonoBehaviour
     }
 
     public Text timeText;
-    public GameObject endText;
     public Text matchText;
     public Text scoreText;
 
+    public GameObject endText;
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;

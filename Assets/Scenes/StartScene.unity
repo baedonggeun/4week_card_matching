@@ -773,8 +773,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmList:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: c64470363359d354cbaec2d430046ace, type: 3}
+  - {fileID: 8300000, guid: 658d9ed7a84d07245bc74150c9e8c40b, type: 3}
   audioSource: {fileID: 1753820701}
 --- !u!4 &1753820703
 Transform:

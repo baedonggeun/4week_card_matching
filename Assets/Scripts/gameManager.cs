@@ -13,28 +13,27 @@ public class gameManager : MonoBehaviour
         I = this;
     }
 
-
     public Text timeText;
     public GameObject endText;
+    public Text matchText;
     public Text scoreText;
+
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;
 
+    public AudioSource audioSource;
     public AudioClip tada;
     public AudioClip fail;
     public AudioClip urgent;
-    public AudioSource audioSource;
 
-
-    float time = 60.0f;
-
-   
+    float time = 60.0f; //시간
+    float score = 10.00f; //점수
+    
+    int matchCount = 0; //매칭 횟수
     int card_type = 16; //카드 종류
     int card_count = 16; //게임에 사용되는 카드 전체 개수
 
-    float score = 10.00f;
-    float matchCount = 0.00f;
 
     // Start is called before the first frame update
     void Start()
@@ -82,14 +81,15 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
+        matchText.text = matchCount.ToString("N2");
         scoreText.text = (score - matchCount).ToString("N2");
 
         //15초 이하면 timeText 색상 붉은색으로 변경 + urgent sound 재생
-        if (time <= 15.0f)
+        if (time <= 15.00f)
         {
             timeText.text = "<color=#960707>" + time.ToString("N2") + "</color>";
 
-            if(time >= 14.0f)
+            if(time >= 15.01f)
             {
                 audioSource.PlayOneShot(urgent);
             }
@@ -98,7 +98,11 @@ public class gameManager : MonoBehaviour
         //0.00초 이하일 경우 게임 종료
         if (time <= 0.00f)
         {
-            Invoke("GameEnd", 0.0f);
+            Invoke("GameEnd", 0.00f);
+
+            time = 0.00f;
+
+            score += time;
         }
     }
 
@@ -116,7 +120,9 @@ public class gameManager : MonoBehaviour
 
             if(cardsLeft == 2)
             {
-                Invoke("GameEnd", 0.1f);
+                Invoke("GameEnd", 0.00f);
+
+                score += time;
             }
 
             audioSource.PlayOneShot(tada);
@@ -143,8 +149,6 @@ public class gameManager : MonoBehaviour
 
     void GameEnd()
     {
-        score += time;
-        
         Time.timeScale = 0f;
 
         endText.SetActive(true);

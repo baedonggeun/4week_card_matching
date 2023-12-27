@@ -111,6 +111,8 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
 
+            time -= 1.0f;
+
             audioSource.PlayOneShot(fail);
         }
 

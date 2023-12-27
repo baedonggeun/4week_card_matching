@@ -22,6 +22,8 @@ public class card : MonoBehaviour
         
     }
 
+    //카드 open시 front를 active로 하고 back을 false 상태로 바꿈
+    //첫번째 선택한 카드인지 아닌지 구분하여 저장 및 2번째 선택한 카드면 isMatched 호출
     public void OpenCard()
     {
         anim.SetBool("isOpen", true);
@@ -45,7 +47,8 @@ public class card : MonoBehaviour
 
     }
 
-
+    //public 함수 내에서 다시 Invoke로 Destroy 사용하는 이유는 
+    //gameObject를 파괴하기 때문에 중요한 함수여서 외부에서 접근 막기 위해
     public void destroyCard()
     {
         Invoke("destroyCardInvoke", 0.1f);

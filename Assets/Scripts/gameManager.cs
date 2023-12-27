@@ -146,13 +146,16 @@ public class gameManager : MonoBehaviour
             time -= 1.0f;
         }
 
+        //매칭 시도마다 매칭횟수 +1
         matchCount++;
 
+        //매칭 시도마다 점수 -1
         score -= 1;
 
+        //점수가 0 이하면 0으로 표기
         if(score <= 0.00f)
         {
-            score = 0;
+            score = 0.00f;
         }
 
         //초기화
@@ -164,6 +167,7 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
 
+        //점수 창 및 최고 점수 현재 점수 표기
         endPanel.SetActive(true);
 
         if (PlayerPrefs.HasKey("bestscore") == false)

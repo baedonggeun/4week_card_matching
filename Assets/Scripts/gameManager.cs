@@ -74,8 +74,10 @@ public class gameManager : MonoBehaviour
         time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
 
-        if(time <= 15.0f && time >= 13.0f)
+        if(time <= 15.0f)
         {
+            timeText.text = "<color=#960707>" + time.ToString("N2") + "</color>";
+
             audioSource.PlayOneShot(urgent);
         }
 

@@ -430,7 +430,9 @@ MonoBehaviour:
   card: {fileID: 6390207088607420598, guid: 4731e1f0739a14b4da18b4ee70fa1c34, type: 3}
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
-  match: {fileID: 8300000, guid: ca44077fde208c948be0509a5920cdda, type: 3}
+  tada: {fileID: 8300000, guid: cb22df5c2f69b16488ca88ac920c6a22, type: 3}
+  fail: {fileID: 8300000, guid: 4548ec3114c49d84bac2888f97d486e7, type: 3}
+  urgent: {fileID: 8300000, guid: 7e9caa6a942b2e942af9a737ae46062b, type: 3}
   audioSource: {fileID: 919915507}
 --- !u!4 &919915506
 Transform:
@@ -459,7 +461,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

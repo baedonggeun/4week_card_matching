@@ -20,7 +20,9 @@ public class gameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
 
-    public AudioClip match;
+    public AudioClip tada;
+    public AudioClip fail;
+    public AudioClip urgent;
     public AudioSource audioSource;
 
 
@@ -72,6 +74,11 @@ public class gameManager : MonoBehaviour
         time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
 
+        if(time <= 15.0f && time >= 13.0f)
+        {
+            audioSource.PlayOneShot(urgent);
+        }
+
         if(time <= 0.00f)
         {
             Invoke("GameEnd", 0.0f);
@@ -95,12 +102,14 @@ public class gameManager : MonoBehaviour
                 Invoke("GameEnd", 0.1f);
             }
 
-            audioSource.PlayOneShot(match);
+            audioSource.PlayOneShot(tada);
         }
         else 
         {
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
+
+            audioSource.PlayOneShot(fail);
         }
 
         firstCard = null;

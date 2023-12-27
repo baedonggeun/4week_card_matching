@@ -16,11 +16,13 @@ public class gameManager : MonoBehaviour
     public Text timeText;
     public Text matchText;
     public Text scoreText;
+    public Text setText;
+    public Text bestScoreTxt;
 
-    public GameObject endText;
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;
+    public GameObject endPanel;
 
     public AudioSource audioSource;
     public AudioClip tada;
@@ -96,7 +98,7 @@ public class gameManager : MonoBehaviour
         //0.00초 이하일 경우 게임 종료
         if (time <= 0.00f)
         {
-            Invoke("GameEnd", 0.00f);
+            Invoke("GameEnd", 0.001f);
 
             time = 0.00f;
 
@@ -128,7 +130,7 @@ public class gameManager : MonoBehaviour
             //마지막 카드 매칭됐을 때 게임 종료
             if (cardsLeft == 2)
             {
-                Invoke("GameEnd", 0.00f);
+                Invoke("GameEnd", 0.001f);
 
                 score += time;
             }
@@ -162,6 +164,23 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
 
-        endText.SetActive(true);
+        endPanel.SetActive(true);
+
+        if (PlayerPrefs.HasKey("bestscore") == false)
+        {
+            PlayerPrefs.SetFloat("bestscore", score);
+        }
+        else
+        {
+            if (score > PlayerPrefs.GetFloat("bestscore"))
+            {
+                PlayerPrefs.SetFloat("bestscore", score);
+            }
+        }
+
+        float maxScore = PlayerPrefs.GetFloat("bestscore");
+
+        setText.text = scoreText.text;
+        bestScoreTxt.text = maxScore.ToString("N2");
     }
 }

@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class endText : MonoBehaviour
+public class bestScoreText : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,10 +14,5 @@ public class endText : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void ReGame()
-    {
-        SceneManager.LoadScene("EndScene");
     }
 }

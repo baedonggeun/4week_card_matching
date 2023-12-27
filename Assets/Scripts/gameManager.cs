@@ -24,7 +24,7 @@ public class gameManager : MonoBehaviour
     public AudioSource audioSource;
 
 
-    float time;
+    float time = 30.0f;
 
    
     int card_type = 16; //카드 종류
@@ -69,8 +69,13 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
+
+        if(time <= 0.00f)
+        {
+            Invoke("GameEnd", 0.0f);
+        }
     }
 
     public void isMatched()

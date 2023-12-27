@@ -6,6 +6,9 @@ public class card : MonoBehaviour
 {
     public Animator anim;
 
+    public AudioClip flip; //플레이할 음악 파일
+    public AudioSource audioSource; 
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,8 @@ public class card : MonoBehaviour
             gameManager.I.secondCard = gameObject;
             gameManager.I.isMatched();
         }
+
+        audioSource.PlayOneShot(flip);
 
     }
 

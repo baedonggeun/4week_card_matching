@@ -20,6 +20,9 @@ public class gameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
 
+    public AudioClip match;
+    public AudioSource audioSource;
+
 
     float time;
 
@@ -86,6 +89,8 @@ public class gameManager : MonoBehaviour
             {
                 Invoke("GameEnd", 0.1f);
             }
+
+            audioSource.PlayOneShot(match);
         }
         else 
         {

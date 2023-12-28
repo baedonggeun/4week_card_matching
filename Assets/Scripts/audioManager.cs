@@ -6,17 +6,17 @@ using UnityEngine.SceneManagement;
 public class audioManager : MonoBehaviour
 {
     //sound 를 한 곳에서 관리할 수 있도록 singleton 화
-    private static audioManager _instance;
+    private static audioManager Audio;
 
     private void Awake()
     {
-        if(_instance == null)
+        if(Audio == null)
         {
-            _instance = this;
+            Audio = this;
 
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        else if(_instance != this)
+        else if(Audio != this)
         {
             Destroy(gameObject);
         }

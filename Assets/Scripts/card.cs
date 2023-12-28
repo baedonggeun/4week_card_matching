@@ -43,6 +43,7 @@ public class card : MonoBehaviour
             gameManager.I.isMatched();
         }
 
+        //openCard 함수 호출 될 때마다 flip sound 재생
         audioSource.PlayOneShot(flip);
 
     }

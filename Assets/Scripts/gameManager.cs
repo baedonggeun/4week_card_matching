@@ -30,12 +30,12 @@ public class gameManager : MonoBehaviour
     public AudioClip fail;
     public AudioClip urgent;
 
-    float time = 60.0f; //½Ã°£
-    float score = 10.00f; //½ÃÀÛ Á¡¼ö
+    float time = 60.0f; //ì‹œê°„
+    float score = 10.00f; //ì‹œì‘ ì ìˆ˜
     
-    int matchCount = 0; //¸ÅÄª È½¼ö
-    int card_type = 16; //Ä«µå Á¾·ù
-    int card_count = 16; //°ÔÀÓ¿¡ »ç¿ëµÇ´Â Ä«µå ÀüÃ¼ °³¼ö
+    int matchCount = 0; //ë§¤ì¹­ íšŸìˆ˜
+    int card_type = 16; //ì¹´ë“œ ì¢…ë¥˜
+    int card_count = 16; //ê²Œì„ì— ì‚¬ìš©ë˜ëŠ” ì¹´ë“œ ì „ì²´ ê°œìˆ˜
 
 
     // Start is called before the first frame update
@@ -45,26 +45,26 @@ public class gameManager : MonoBehaviour
 
         int[] card_N = new int[card_count];
 
-        //ÀüÃ¼ Ä«µå ¼ö¸¸Å­ ¹è¿­ »ı¼º ¹× °ª ÀÔ·Â
+        //ì „ì²´ ì¹´ë“œ ìˆ˜ë§Œí¼ ë°°ì—´ ìƒì„± ë° ê°’ ì…ë ¥
         for (int i = 0; i < card_count; i++)
         {
             card_N[i] = i;
         }
 
-        //·£´ı ¼¯±â
+        //ëœë¤ ì„ê¸°
         card_N = card_N.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
-        //Ä«µå Â¦À» ¸ÂÃß±â À§ÇØ Ä«µå ¼öÀÇ Àı¹İÀ¸·Î ³ª´©°í ±× °ªÀ» ÀÔ·Â
+        //ì¹´ë“œ ì§ì„ ë§ì¶”ê¸° ìœ„í•´ ì¹´ë“œ ìˆ˜ì˜ ì ˆë°˜ìœ¼ë¡œ ë‚˜ëˆ„ê³  ê·¸ ê°’ì„ ì…ë ¥
         for(int i = 0; i < card_count; i++)
         {
             card_N[i] = card_N[i % (card_count / 2)];
         }
 
-        //·£´ı ¼¯±â << 2¹ø¿¡ ³ª´²¼­ ÇÏ´Â ÀÌÀ¯´Â Â¦ÀÌ ¾È ¸ÂÀ» ¼ö ÀÖ±â ¶§¹®
+        //ëœë¤ ì„ê¸° << 2ë²ˆì— ë‚˜ëˆ ì„œ í•˜ëŠ” ì´ìœ ëŠ” ì§ì´ ì•ˆ ë§ì„ ìˆ˜ ìˆê¸° ë•Œë¬¸
         card_N = card_N.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
 
-        //ÀüÃ¼ Ä«µå °³¼ö¸¸Å­ instance »ı¼º
+        //ì „ì²´ ì¹´ë“œ ê°œìˆ˜ë§Œí¼ instance ìƒì„±
         for (int i = 0; i< card_count; i++)
         {
             GameObject newCard = Instantiate(card);
@@ -85,7 +85,7 @@ public class gameManager : MonoBehaviour
         time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
         
-        //15ÃÊ ÀÌÇÏ¸é timeText »ö»ó ºÓÀº»öÀ¸·Î º¯°æ + urgent sound Àç»ı
+        //15ì´ˆ ì´í•˜ë©´ timeText ìƒ‰ìƒ ë¶‰ì€ìƒ‰ìœ¼ë¡œ ë³€ê²½ + urgent sound ì¬ìƒ
         if (time <= 15.00f)
         {
             timeText.text = "<color=#960707>" + time.ToString("N2") + "</color>";
@@ -96,7 +96,7 @@ public class gameManager : MonoBehaviour
             }
         }
 
-        //0.00ÃÊ ÀÌÇÏÀÏ °æ¿ì °ÔÀÓ Á¾·á
+        //0.00ì´ˆ ì´í•˜ì¼ ê²½ìš° ê²Œì„ ì¢…ë£Œ
         if (time <= 0.00f)
         {
             Invoke("GameEnd", 0.001f);
@@ -110,13 +110,13 @@ public class gameManager : MonoBehaviour
         scoreText.text = score.ToString("N2");
     }
 
-    //¸ÅÄª ÇÔ¼ö
+    //ë§¤ì¹­ í•¨ìˆ˜
     public void isMatched()
     {
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
 
-        //Ä«µå ¸ÅÄª ¼º°ø ½Ã
+        //ì¹´ë“œ ë§¤ì¹­ ì„±ê³µ ì‹œ
         if(firstCardImage == secondCardImage)
         {
             firstCard.GetComponent<card>().destroyCard();
@@ -128,7 +128,7 @@ public class gameManager : MonoBehaviour
 
             score += 6;
 
-            //¸¶Áö¸· Ä«µå ¸ÅÄªµÆÀ» ¶§ °ÔÀÓ Á¾·á
+            //ë§ˆì§€ë§‰ ì¹´ë“œ ë§¤ì¹­ëì„ ë•Œ ê²Œì„ ì¢…ë£Œ
             if (cardsLeft == 2)
             {
                 Invoke("GameEnd", 0.001f);
@@ -136,7 +136,7 @@ public class gameManager : MonoBehaviour
                 score += time;
             }
         }
-        //Ä«µå ¸ÅÄª ½ÇÆĞ ½Ã
+        //ì¹´ë“œ ë§¤ì¹­ ì‹¤íŒ¨ ì‹œ
         else 
         {
             firstCard.GetComponent<card>().closeCard();
@@ -147,19 +147,19 @@ public class gameManager : MonoBehaviour
             time -= 1.0f;
         }
 
-        //¸ÅÄª ½Ãµµ¸¶´Ù ¸ÅÄªÈ½¼ö +1
+        //ë§¤ì¹­ ì‹œë„ë§ˆë‹¤ ë§¤ì¹­íšŸìˆ˜ +1
         matchCount++;
 
-        //¸ÅÄª ½Ãµµ¸¶´Ù Á¡¼ö -1
+        //ë§¤ì¹­ ì‹œë„ë§ˆë‹¤ ì ìˆ˜ -1
         score -= 1;
 
-        //Á¡¼ö°¡ 0 ÀÌÇÏ¸é 0À¸·Î Ç¥±â
+        //ì ìˆ˜ê°€ 0 ì´í•˜ë©´ 0ìœ¼ë¡œ í‘œê¸°
         if(score <= 0.00f)
         {
             score = 0.00f;
         }
 
-        //ÃÊ±âÈ­
+        //ì´ˆê¸°í™”
         firstCard = null;
         secondCard = null;
     }
@@ -168,7 +168,7 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
 
-        //Á¡¼ö Ã¢ ¹× ÃÖ°í Á¡¼ö ÇöÀç Á¡¼ö Ç¥±â
+        //ì ìˆ˜ ì°½ ë° ìµœê³  ì ìˆ˜ í˜„ì¬ ì ìˆ˜ í‘œê¸°
         endPanel.SetActive(true);
 
         if (PlayerPrefs.HasKey("bestscore") == false)
@@ -190,3 +190,4 @@ public class gameManager : MonoBehaviour
         bestScoreTxt.text = maxScore.ToString("N2");
     }
 }
+//ìœ ë‹ˆì½”ë“œ ì ìš©í•´ì„œ ì €ì¥

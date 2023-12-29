@@ -6,7 +6,7 @@ public class card : MonoBehaviour
 {
     public Animator anim;
 
-    public AudioClip flip; //ÇÃ·¹ÀÌÇÒ À½¾Ç ÆÄÀÏ
+    public AudioClip flip; //í”Œë ˆì´í•  ìŒì•… íŒŒì¼
     public AudioSource audioSource; 
 
 
@@ -22,8 +22,8 @@ public class card : MonoBehaviour
         
     }
 
-    //Ä«µå open½Ã front¸¦ active·Î ÇÏ°í backÀ» false »óÅÂ·Î ¹Ù²Ş
-    //Ã¹¹øÂ° ¼±ÅÃÇÑ Ä«µåÀÎÁö ¾Æ´ÑÁö ±¸ºĞÇÏ¿© ÀúÀå ¹× 2¹øÂ° ¼±ÅÃÇÑ Ä«µå¸é isMatched È£Ãâ
+    //ì¹´ë“œ openì‹œ frontë¥¼ activeë¡œ í•˜ê³  backì„ false ìƒíƒœë¡œ ë°”ê¿ˆ
+    //ì²«ë²ˆì§¸ ì„ íƒí•œ ì¹´ë“œì¸ì§€ ì•„ë‹Œì§€ êµ¬ë¶„í•˜ì—¬ ì €ì¥ ë° 2ë²ˆì§¸ ì„ íƒí•œ ì¹´ë“œë©´ isMatched í˜¸ì¶œ
     public void OpenCard()
     {
         anim.SetBool("isOpen", true);
@@ -43,13 +43,13 @@ public class card : MonoBehaviour
             gameManager.I.isMatched();
         }
 
-        //openCard ÇÔ¼ö È£Ãâ µÉ ¶§¸¶´Ù flip sound Àç»ı
+        //openCard í•¨ìˆ˜ í˜¸ì¶œ ë  ë•Œë§ˆë‹¤ flip sound ì¬ìƒ
         audioSource.PlayOneShot(flip);
 
     }
 
-    //public ÇÔ¼ö ³»¿¡¼­ ´Ù½Ã Invoke·Î Destroy »ç¿ëÇÏ´Â ÀÌÀ¯´Â 
-    //gameObject¸¦ ÆÄ±«ÇÏ±â ¶§¹®¿¡ Áß¿äÇÑ ÇÔ¼ö¿©¼­ ¿ÜºÎ¿¡¼­ Á¢±Ù ¸·±â À§ÇØ
+    //public í•¨ìˆ˜ ë‚´ì—ì„œ ë‹¤ì‹œ Invokeë¡œ Destroy ì‚¬ìš©í•˜ëŠ” ì´ìœ ëŠ” 
+    //gameObjectë¥¼ íŒŒê´´í•˜ê¸° ë•Œë¬¸ì— ì¤‘ìš”í•œ í•¨ìˆ˜ì—¬ì„œ ì™¸ë¶€ì—ì„œ ì ‘ê·¼ ë§‰ê¸° ìœ„í•´
     public void destroyCard()
     {
         Invoke("destroyCardInvoke", 0.1f);
